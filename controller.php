@@ -132,8 +132,9 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
     public function actionDelete(<?= $actionParams ?>)
     {
         $this->findModel(<?= $actionParams ?>)->delete();
+        Yii::$app->session->setFlash('success', '<?= Inflector::camel2words(StringHelper::basename($generator->modelClass)) ?> deleted');
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     /**
